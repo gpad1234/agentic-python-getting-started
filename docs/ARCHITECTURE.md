@@ -398,6 +398,28 @@ FROM osquery_schedule;
 - Implement proper error handling
 - Cache expensive operations
 - Monitor resource usage
+
+
+## Alternate orchestrator: LangChain + LangGraph
+
+As an optional alternate design, you can use LangChain with LangGraph to
+orchestrate the same osquery tool callables. This approach is useful when
+you want graph-based planning, richer LLM-driven control flow, or a visual
+authoring surface for tool workflows.
+
+This repository includes a lightweight adapter (`langgraph_adapter.py`) that
+returns a serializable design map when the runtime packages are not
+installed, and a runtime-friendly representation when `langchain` and
+`langgraph` are available. See `docs/ALTERNATE_DESIGN_LANGCHAIN.md` for
+detailed tradeoffs and a quick-start.
+
+Notes:
+- Keep `mcp_osquery_server/osquery_tools.py` as the canonical implementation
+   of tools. The LangGraph design should map graph nodes to those callables.
+- Installing the optional packages is required only if you plan to run the
+   LangChain/Graph runtime. The adapter itself is safe to import without
+   those packages.
+
 - Use async/await patterns
 
 ### 3. Maintenance Guidelines

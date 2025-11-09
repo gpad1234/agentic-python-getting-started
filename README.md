@@ -1,27 +1,152 @@
-# Anthropic Python Project with MCP OSQuery Server
+# OSQuery MCP Server with LangChain/LangGraph Integration
 
-A Python project featuring:
-1. **Claude API Integration** - Using Anthropic's Claude models
-2. **MCP OSQuery Server** - System information queries via Model Context Protocol
+A comprehensive Model Context Protocol (MCP) server that provides system information querying capabilities through OSQuery, with advanced LangChain and LangGraph integration for intelligent automation and visual workflow design.
 
-## 🚀 Quick Start
+## 🚀 Key Features
 
-1. **Activate the pre-configured environment:**
-   ```bash
-   source venv/bin/activate
-   ```
+- **MCP Server**: Direct OSQuery tool access via JSON-RPC over STDIO
+- **LangGraph Workflows**: Visual workflow orchestration with graph-based design
+- **LangChain Agents**: Intelligent LLM-driven tool selection and chaining
+- **Interactive Builder**: Web interface for designing and testing workflows
+- **Enterprise Security**: Audit logging, rate limiting, and role-based access control
+- **Production Ready**: Docker, Kubernetes, and monitoring support
 
-2. **Set up your API key:**
-   ```bash
-   cp .env.example .env
-   # Edit .env and add your Anthropic API key
-   ```
+## 🏗️ Three Integration Approaches
 
-3. **Run the project:**
-   ```bash
-   python main.py              # Test Claude API
-   python demo_osquery_server.py  # Demo MCP capabilities
-   ```
+### 1. MCP Server (Original)
+Direct tool access for AI models and IDEs:
+```bash
+python -m mcp_osquery_server.server
+```
+
+### 2. LangGraph Workflows
+Visual graph-based orchestration:
+```bash
+python examples/langgraph_example.py
+```
+
+### 3. LangChain Agents  
+Intelligent LLM-driven automation:
+```bash
+python examples/langchain_agent.py --interactive
+```
+
+## 📊 Quick Start
+
+```bash
+# Clone and setup
+git clone https://github.com/gpad1234/agentic-python-getting-started.git
+cd agentic-python-getting-started
+
+# Install all dependencies (includes LangChain/LangGraph)
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Set up your API key
+cp .env.example .env
+# Edit .env and add your Anthropic API key
+
+# Test the interactive workflow builder
+python web_interface/workflow_builder.py --sample
+
+# Run a comprehensive security analysis
+python examples/langchain_agent.py
+```
+
+## 🎯 Use Cases
+
+| Approach | Best For | Example |
+|----------|----------|---------|
+| **MCP Server** | IDE integration, direct AI tool access | Claude Desktop, Cursor IDE |
+| **LangGraph** | Complex workflows, visual design | Multi-step security analysis |
+| **LangChain Agent** | Intelligent automation, natural language | "Check for performance issues" |
+
+## 🛠️ Available Tools
+
+- `system_info`: Get comprehensive system information
+- `processes`: List running processes with memory usage
+- `users`: Enumerate system users and properties
+- `network_interfaces`: Show network interface details
+- `network_connections`: Display active network connections
+- `custom_query`: Execute custom OSQuery SQL with validation
+
+## 🔐 Enterprise Security
+
+- **Role-Based Access Control**: Guest, User, Analyst, Admin roles
+- **Audit Logging**: JSON-structured logging with compliance reporting
+- **Rate Limiting**: Token bucket and sliding window algorithms
+- **SQL Injection Protection**: Pattern detection and query validation
+- **Policy Engine**: Customizable security policies and violations
+
+## 🐳 Deployment Options
+
+### Docker (Recommended)
+```bash
+docker-compose -f deployment/docker-compose.yml up -d
+```
+
+### Kubernetes
+```bash
+kubectl apply -f deployment/k8s/
+```
+
+### Local Development
+```bash
+# MCP Server
+python -m mcp_osquery_server.server
+
+# LangGraph Service
+python examples/langgraph_example.py --interactive
+
+# Interactive Workflow Builder
+python web_interface/workflow_builder.py
+```
+
+## 📈 Advanced Features
+
+### Visual Workflow Design
+Create complex analysis workflows with the interactive builder:
+```bash
+python web_interface/workflow_builder.py
+# Commands: add, connect, show, diagram, export, test
+```
+
+### Security Monitoring
+```python
+from security.audit_logger import get_audit_logger
+from security.rate_limiter import check_rate_limit
+from security.security_policy import validate_user_request
+
+# Comprehensive security validation
+violations = validate_user_request("analyst1", "custom_query", 
+                                  {"sql": "SELECT * FROM processes LIMIT 10"})
+```
+
+### Intelligent Analysis
+```python
+from examples.langchain_agent import OSQueryAgent
+
+agent = OSQueryAgent()
+result = await agent.analyze("Show me any security concerns")
+# Agent automatically selects and chains appropriate tools
+```
+
+## 📚 Documentation
+
+- **[LangChain Integration Guide](LANGCHAIN_INTEGRATION_GUIDE.md)**: Comprehensive guide to all features
+- **[Architecture Documentation](docs/ARCHITECTURE.md)**: System design and components
+- **[Deployment Guide](deployment/DEPLOYMENT_GUIDE.md)**: Production deployment
+- **[Security Documentation](security/README.md)**: Security features and configuration
+- **[API Reference](docs/TECHNICAL_SPECS.md)**: Complete API documentation
+
+## 🔄 Migration from MCP-Only
+
+Existing MCP server users can incrementally adopt new features:
+
+1. **Keep existing MCP functionality** - All original features remain unchanged
+2. **Add LangGraph workflows** - Create visual workflows for complex analysis
+3. **Integrate LangChain agents** - Add intelligent automation layer
+4. **Enable security features** - Add audit logging and access control
 
 ## 🔒 Security Setup
 
@@ -36,89 +161,35 @@ A Python project featuring:
 - Create an account and generate an API key
 - Add to `.env`: `ANTHROPIC_API_KEY=your_key_here`
 
-## Usage
-
-### Run Claude Example
-```bash
-python main.py
-```
-
-### Run MCP OSQuery Server Demo
-```bash
-python demo_osquery_server.py
-```
-
-### Start MCP OSQuery Server (requires osquery installed)
-```bash
-python -m mcp_osquery_server.server
-```
-
-## Project Structure
-
-- `main.py` - Example script showing how to use the Anthropic API
-- `mcp_osquery_server/` - MCP server for system queries
-  - `server.py` - Main MCP server
-  - `osquery_tools.py` - osquery wrapper functions
-  - `README.md` - Detailed documentation
-- `demo_osquery_server.py` - Demo showing MCP capabilities
-- `requirements.txt` - Python dependencies
-- `.env.example` - Template for environment variables
-- `.env` - Your actual environment variables (not tracked in git)
-- `SETUP_GUIDE.md` - Complete setup and integration guide
-
-## Dependencies
-
-- `anthropic` - Official Anthropic Python library
-- `mcp` - Model Context Protocol library
-- `python-dotenv` - Load environment variables from .env files
-- `pydantic` - Data validation
-
-## MCP OSQuery Server
-
-The `mcp_osquery_server` provides system information queries through the MCP protocol. Available tools:
-
-- `system_info` - Get system information
-- `processes` - Get running processes
-- `users` - Get system users
-- `network_interfaces` - Get network adapters
-- `network_connections` - Get active connections
-- `open_files` - Get open files
-- `disk_usage` - Get disk usage
-- `installed_packages` - Get installed software
-- `running_services` - Get running services
-- `custom_query` - Execute custom osquery SQL
-
-See `SETUP_GUIDE.md` for detailed integration instructions.
-
-## Getting Started
-
-1. **Follow the security setup above** 🔒
-2. **Read `SETUP_GUIDE.md`** for complete documentation
-3. **Run the demo**: `python demo_osquery_server.py`
-4. **Test Claude**: `python main.py`
-
-## 📁 Project Files
-
-- `main.py` - Claude API example script
-- `mcp_osquery_server/` - MCP server for system queries
-  - `server.py` - Main MCP server (compatible with MCP 1.21.0)
-  - `osquery_tools.py` - osquery wrapper functions
-  - `README.md` - Detailed server documentation
-- `demo_osquery_server.py` - Demo showing capabilities
-- `requirements.txt` - Python dependencies
-- `.env.example` - Environment template (safe)
-- `.env` - Your API keys (git ignored)
-- `.gitignore` - Comprehensive security rules
-- `SETUP_GUIDE.md` - Complete setup guide
-- `.vscode/tasks.json` - VS Code task configuration
-
 ## 🛡️ Security Features
 
 - ✅ **Environment files protected** (`.env*` git ignored)
 - ✅ **API keys secured** (never in source code)  
 - ✅ **Virtual environment ignored** (`venv/` excluded)
 - ✅ **Comprehensive gitignore** (secrets, credentials, keys)
+- ✅ **Enterprise security** (RBAC, audit logging, rate limiting)
 - ✅ **Ready for production** (secure by default)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Add tests for new functionality
+4. Update documentation
+5. Commit changes (`git commit -m 'Add amazing feature'`)
+6. Push to branch (`git push origin feature/amazing-feature`) 
+7. Open Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+- **Issues**: [GitHub Issues](https://github.com/gpad1234/agentic-python-getting-started/issues)
+- **Documentation**: See `docs/` directory for comprehensive guides
+- **Examples**: Check `examples/` directory for usage patterns
+- **Security**: Report security issues privately
 
 ## ⚠️ Security Reminder
 
@@ -128,3 +199,7 @@ See `SETUP_GUIDE.md` for detailed integration instructions.
 - Virtual environment directories
 
 The `.gitignore` is configured to prevent this automatically.
+
+---
+
+**Ready for production use with comprehensive testing, enterprise security, and multiple deployment options.**

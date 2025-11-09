@@ -225,6 +225,11 @@ async def main():
         logger.info("OSQuery MCP Server running on stdio")
 
 
+def create_server():
+    """Create and return the MCP server instance for testing."""
+    return server
+
+
 if __name__ == "__main__":
     import asyncio
     asyncio.run(main())

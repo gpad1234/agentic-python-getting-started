@@ -1,28 +1,28 @@
 # Test Results Report
 
-**Generated:** 2025-11-10T07:30:55.292640
+**Generated:** 2025-11-10T10:31:17.924125
 **Overall Status:** FAILED
-**Duration:** 24.38s
+**Duration:** 11.54s
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
-| Total Passed | 36 |
-| Total Failed | 2 |
+| Total Passed | 39 |
+| Total Failed | 3 |
 | Total Skipped | 17 |
-| Total Errors | 3 |
+| Total Errors | 0 |
 
 ## Test Suite Results
 
 | Test Suite | Status | Duration | P/F/S/E |
 |------------|--------|----------|---------|
-| MCP Server Core | PASSED | 5.54s | 10/0/0/0 |
-| Security Components | FAILED | 3.29s | 9/0/0/3 |
-| Workflow Builder | FAILED | 2.86s | 12/1/0/0 |
-| LangGraph Workflows | PASSED | 3.93s | 3/0/7/0 |
-| LangChain Agent | PASSED | 3.81s | 1/0/10/0 |
-| Integration Tests | FAILED | 4.95s | 1/1/0/0 |
+| MCP Server Core | PASSED | 2.36s | 10/0/0/0 |
+| Security Components | FAILED | 1.74s | 10/1/0/0 |
+| Workflow Builder | FAILED | 1.57s | 14/1/0/0 |
+| LangGraph Workflows | PASSED | 1.94s | 3/0/7/0 |
+| LangChain Agent | PASSED | 1.73s | 1/0/10/0 |
+| Integration Tests | FAILED | 2.19s | 1/1/0/0 |
 
 ## Dependencies
 
@@ -36,8 +36,8 @@
 
 ## Notes
 
-- Tests were run with Python 3.12.3
-- Project root: /home/girish/python_work/agentic_python_getting_started
+- Tests were run with Python 3.12.7
+- Project root: /Users/gp/python/git_agentic/agentic-python-getting-started
 - Some tests may be skipped due to missing optional dependencies
 - For full functionality, install: `pip install langchain langgraph anthropic`
 

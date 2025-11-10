@@ -164,13 +164,15 @@ class TestSecurityPolicy:
     
     def setup_method(self):
         """Setup test environment"""
-        self.policy = SecurityPolicy()
+        from security.security_policy import SecurityPolicyEngine
+        self.policy = SecurityPolicyEngine()
 
     def test_policy_creation(self):
         """Test security policy creation"""
         assert self.policy is not None
-        assert hasattr(self.policy, 'validate_user_request')
-        assert hasattr(self.policy, 'check_sql_injection')
+        # The SecurityPolicyEngine has different method names
+        assert hasattr(self.policy, 'validate_request')
+        assert hasattr(self.policy, '_detect_sql_injection')
 
     def test_rbac_guest_permissions(self):
         """Test RBAC for guest users"""

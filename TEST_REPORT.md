@@ -1,15 +1,15 @@
 # Test Results Report
 
-**Generated:** 2025-11-10T10:31:17.924125
+**Generated:** 2025-11-10T10:43:58.602368
 **Overall Status:** FAILED
-**Duration:** 11.54s
+**Duration:** 11.37s
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
-| Total Passed | 39 |
-| Total Failed | 3 |
+| Total Passed | 50 |
+| Total Failed | 2 |
 | Total Skipped | 17 |
 | Total Errors | 0 |
 
@@ -17,12 +17,12 @@
 
 | Test Suite | Status | Duration | P/F/S/E |
 |------------|--------|----------|---------|
-| MCP Server Core | PASSED | 2.36s | 10/0/0/0 |
-| Security Components | FAILED | 1.74s | 10/1/0/0 |
-| Workflow Builder | FAILED | 1.57s | 14/1/0/0 |
-| LangGraph Workflows | PASSED | 1.94s | 3/0/7/0 |
-| LangChain Agent | PASSED | 1.73s | 1/0/10/0 |
-| Integration Tests | FAILED | 2.19s | 1/1/0/0 |
+| MCP Server Core | PASSED | 2.17s | 10/0/0/0 |
+| Security Components | PASSED | 1.53s | 21/0/0/0 |
+| Workflow Builder | FAILED | 1.52s | 14/1/0/0 |
+| LangGraph Workflows | PASSED | 2.17s | 3/0/7/0 |
+| LangChain Agent | PASSED | 1.77s | 1/0/10/0 |
+| Integration Tests | FAILED | 2.2s | 1/1/0/0 |
 
 ## Dependencies
 

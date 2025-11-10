@@ -52,21 +52,11 @@ class TestSystemIntegration:
         assert len(violations) <= 1
         
         # 3. Execute MCP tool call
-        from mcp.types import CallToolRequest
-        request = CallToolRequest(
-            method="tools/call",
-            params={
-                "name": "system_info",
-                "arguments": {}
-            }
-        )
+        # call_tool is a decorated handler function, not a method
+        from mcp_osquery_server.server import call_tool
         
-        # Direct call since MCP interface might differ
-        try:
-            response = await mcp_server.call_tool(request)
-        except TypeError:
-            # Fallback for different MCP interface
-            response = await mcp_server._call_tool_impl("system_info", {})
+        # Call the tool directly with name and arguments
+        response = await call_tool(name="system_info", arguments={})
         assert response.content[0].text is not None
         
         # 4. Audit logging
@@ -81,6 +71,9 @@ class TestSystemIntegration:
     @patch('builtins.open')
     async def test_security_violation_flow(self, mock_open_file):
         """Test security violation handling flow"""
+        from security.audit_logger import get_audit_logger, Severity
+        from security.security_policy import validate_user_request
+        
         mock_open_file.return_value.__enter__.return_value.write = MagicMock()
         
         user_id = "malicious_user"
@@ -94,8 +87,10 @@ class TestSystemIntegration:
         # Should log security violation
         logger = get_audit_logger()
         logger.log_security_violation(
-            user_id, "sql_injection",
-            {"query": params["sql"]}, "high"
+            violation_type="sql_injection",
+            details=params["sql"],
+            session_id=user_id,
+            severity=Severity.HIGH
         )
         
         assert mock_open_file.called

@@ -138,6 +138,27 @@ class WorkflowBuilder:
         self.workflow.edges.append(edge)
         print(f"✅ Added edge: {from_node} → {to_node}")
     
+    def validate_workflow(self) -> bool:
+        """Validate the workflow structure"""
+        # Check if workflow has at least start and end nodes
+        has_start = any(node.type == NodeType.START for node in self.workflow.nodes)
+        has_end = any(node.type == NodeType.END for node in self.workflow.nodes)
+        
+        if not has_start or not has_end:
+            return False
+        
+        # Check if there's at least one edge
+        if len(self.workflow.edges) == 0:
+            return False
+        
+        # Check that all edges reference valid nodes
+        node_ids = {node.id for node in self.workflow.nodes}
+        for edge in self.workflow.edges:
+            if edge.from_node not in node_ids or edge.to_node not in node_ids:
+                return False
+        
+        return True
+    
     def generate_mermaid_diagram(self) -> str:
         """Generate Mermaid diagram from workflow"""
         lines = ["graph TD"]
